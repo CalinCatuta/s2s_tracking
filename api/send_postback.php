@@ -3,7 +3,7 @@
 function sendPostback($click_id, $payout) {
     // Use http_build_query() for safer URL encoding
     $query = http_build_query(["click_id" => $click_id, "payout" => $payout]);
-    $postback_url = "https://adnetwork.com/postback?" . $query;
+    $postback_url = "http://localhost/s2s_tracking/public/fake_postback.php?" . $query;
 
     // Initializes a cURL session and sets the request URL ($postback_url).
     // This means cURL will send a request to the ad network at this URL.
