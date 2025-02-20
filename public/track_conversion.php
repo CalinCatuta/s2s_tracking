@@ -18,9 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $payout = $_GET["payout"] ?? 0.00;
 
     try {
+
         // The WHERE clause is used to extract only those records that fulfill a specified condition.
        // It prepares an SQL query to fetch a record from the clicks table where click_id matches the one provided in the request.
-        $stmt = $pdo->prepare("SELECT * FROM clicks WHERE click_id = :click_id");
+
+        // Use SELECT COUNT(*) Instead of SELECT * || If you just need to know how many clicks an offer received. && In reports & analytics, where you show total clicks/conversions.
+        // SELECT - Loads unnecessary data into memory, making the query slow if there are millions of rows. || Returns all columns (id, click_id, offer_id, timestamp, etc.).
+        // COUNT - Only returns the number of matching rows (1 number) instead of full data. || Much faster than fetching all columns.
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM clicks WHERE click_id = :click_id");
         $stmt->execute(["click_id" => $click_id]);
 
         // rowCount() checks how many rows were found in the clicks table.

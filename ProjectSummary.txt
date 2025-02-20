@@ -1,0 +1,32 @@
+📌 What We Have Now & What It Does
+✅ Current System Summary
+You have built a basic Server-to-Server (S2S) tracking system, which is common in affiliate marketing, ad networks, and analytics platforms. Here’s how it works:
+
+1️⃣ User Clicks an Ad (track_click.php)
+
+A user clicks on an ad/link (from a partner or affiliate).
+The click_id and offer_id are recorded in the clicks table.
+Response: {"status": "success", "message": "Click tracked!"}
+
+2️⃣ User Completes an Action (track_conversion.php)
+
+If the user makes a purchase or registers, the advertiser sends a postback with the click_id.
+We check if this click_id exists in the clicks table to prevent fraud.
+If valid, we store the conversion in the conversions table.
+Response: {"status": "success", "message": "Conversion tracked!"}
+
+3️⃣ Postback is Sent to an Ad Network (sendPostback.php)
+
+Once a conversion is tracked, we notify the ad network (or another system).
+The request is sent via cURL to a postback URL (previously a fake endpoint).
+This is important because networks reward affiliates based on conversions.
+
+4️⃣ Admin Can Retrieve Reports (get_reports.php)
+
+Using get_reports.php, an admin can check the total clicks and conversions stored.
+
+
+📌 Why Do We Need Conversions?
+Monetization 🤑 – In affiliate marketing, an advertiser pays for valid conversions (not just clicks).
+Fraud Prevention 🚫 – You only store real conversions by verifying click_id before inserting.
+Tracking Performance 📊 – You can analyze data to see which ads perform best.

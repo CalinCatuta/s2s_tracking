@@ -18,3 +18,7 @@ CREATE TABLE conversions (
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (click_id) REFERENCES clicks(click_id) ON DELETE CASCADE
 );
+
+
+
+ALTER TABLE clicks ADD INDEX idx_click_id (click_id); // An INDEX works like the index of a book. Instead of scanning every row in the table, MySQL can quickly find matching rows.
